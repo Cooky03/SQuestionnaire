@@ -1,0 +1,7 @@
+com\demo1\controller\UserController.class
+com\demo1\beans\HttpResponseEntity.class
+com\demo1\dao\entity\UserEntity.class
+com\demo1\Demo1Application.class
+com\demo1\service\UserService.class
+com\demo1\common\utils\UUIDUtil.class
+com\demo1\dao\UserEntityMapper.class

@@ -1,0 +1,143 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="zh"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>UserController.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">demo1</a> &gt; <a href="index.source.html" class="el_package">com.demo1.controller</a> &gt; <span class="el_source">UserController.java</span></div><h1>UserController.java</h1><pre class="source lang-java linenums">package com.demo1.controller;
+
+import com.demo1.beans.HttpResponseEntity;
+import com.demo1.dao.entity.UserEntity;
+import com.demo1.service.UserService;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.util.CollectionUtils;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RestController;
+
+import java.util.Collection;
+import java.util.List;
+import java.util.Map;
+
+@RestController
+@RequestMapping(&quot;/admin&quot;)
+<span class="nc" id="L19">public class UserController {</span>
+    @Autowired
+    private UserService userService;
+
+    /**
+     * 用户登录验证
+     */
+    @RequestMapping(value = &quot;/userLogin&quot;, method = RequestMethod.POST,headers = &quot;Accept=application/json&quot;)
+    public HttpResponseEntity userLogin(@RequestBody UserEntity userEntity){
+<span class="nc" id="L28">        HttpResponseEntity httpResponseEntity = new HttpResponseEntity();</span>
+        try {
+<span class="nc" id="L30">            List&lt;UserEntity&gt; hasUser = userService.selectUserInfo(userEntity);</span>
+<span class="nc bnc" id="L31" title="All 2 branches missed.">            if (CollectionUtils.isEmpty(hasUser)){</span>
+<span class="nc" id="L32">                httpResponseEntity.setCode(&quot;0&quot;);</span>
+<span class="nc" id="L33">                httpResponseEntity.setData(hasUser.get(0));</span>
+<span class="nc" id="L34">                httpResponseEntity.setMessage(&quot;用户名或密码错误&quot;);</span>
+            }else {
+<span class="nc" id="L36">                httpResponseEntity.setCode(&quot;666&quot;);</span>
+<span class="nc" id="L37">                httpResponseEntity.setData(hasUser);</span>
+<span class="nc" id="L38">                httpResponseEntity.setMessage(&quot;登录成功&quot;);</span>
+            }
+<span class="nc" id="L40">        }catch (Exception e){</span>
+<span class="nc" id="L41">            System.out.println(e.getMessage());</span>
+<span class="nc" id="L42">            e.printStackTrace();</span>
+<span class="nc" id="L43">        }</span>
+<span class="nc" id="L44">        return httpResponseEntity;</span>
+    }
+
+    /**
+     * 用户列表查询
+     */
+    @RequestMapping(value = &quot;/queryUserList&quot;, method = RequestMethod.POST,headers = &quot;Accept=application/json&quot;)
+    public HttpResponseEntity queryUserList(@RequestBody UserEntity userEntity){
+<span class="nc" id="L52">        HttpResponseEntity httpResponseEntity = new HttpResponseEntity();</span>
+        try {
+<span class="nc" id="L54">            List&lt;UserEntity&gt; hasUser = userService.queryUserList(userEntity);</span>
+<span class="nc bnc" id="L55" title="All 2 branches missed.">            if (CollectionUtils.isEmpty(hasUser)){</span>
+<span class="nc" id="L56">                httpResponseEntity.setCode(&quot;0&quot;);</span>
+<span class="nc" id="L57">                httpResponseEntity.setData(hasUser.get(0));</span>
+<span class="nc" id="L58">                httpResponseEntity.setMessage(&quot;无用户信息&quot;);</span>
+            }else {
+<span class="nc" id="L60">                httpResponseEntity.setCode(&quot;666&quot;);</span>
+<span class="nc" id="L61">                httpResponseEntity.setData(hasUser);</span>
+<span class="nc" id="L62">                httpResponseEntity.setMessage(&quot;查询成功&quot;);</span>
+            }
+<span class="nc" id="L64">        }catch (Exception e){</span>
+<span class="nc" id="L65">            System.out.println(e.getMessage());</span>
+<span class="nc" id="L66">            e.printStackTrace();</span>
+<span class="nc" id="L67">        }</span>
+<span class="nc" id="L68">        return httpResponseEntity;</span>
+    }
+
+    /**
+     * 用户添加
+     */
+    @RequestMapping(value = &quot;/addUserInfo&quot;, method = RequestMethod.POST,headers = &quot;Accept=application/json&quot;)
+    public HttpResponseEntity addUser(@RequestBody UserEntity userEntity){
+<span class="nc" id="L76">        HttpResponseEntity httpResponseEntity = new HttpResponseEntity();</span>
+        try {
+<span class="nc" id="L78">            int result = userService.addUserInfo(userEntity);</span>
+<span class="nc bnc" id="L79" title="All 2 branches missed.">            if (result != 0){</span>
+<span class="nc" id="L80">                httpResponseEntity.setCode(&quot;666&quot;);</span>
+<span class="nc" id="L81">                httpResponseEntity.setData(result);</span>
+<span class="nc" id="L82">                httpResponseEntity.setMessage(&quot;创建成功&quot;);</span>
+            }else {
+<span class="nc" id="L84">                httpResponseEntity.setCode(&quot;0&quot;);</span>
+<span class="nc" id="L85">                httpResponseEntity.setData(0);</span>
+<span class="nc" id="L86">                httpResponseEntity.setMessage(&quot;创建失败&quot;);</span>
+            }
+<span class="nc" id="L88">        }catch (Exception e){</span>
+<span class="nc" id="L89">            System.out.println(e.getMessage());</span>
+<span class="nc" id="L90">            e.printStackTrace();</span>
+<span class="nc" id="L91">        }</span>
+<span class="nc" id="L92">        return httpResponseEntity;</span>
+    }
+
+    /**
+     * 修改用户信息
+     */
+    @RequestMapping(value = &quot;/modifyUserInfo&quot;, method = RequestMethod.POST,headers = &quot;Accept=application/json&quot;)
+    public HttpResponseEntity modifyUser(@RequestBody UserEntity userEntity){
+<span class="nc" id="L100">        HttpResponseEntity httpResponseEntity = new HttpResponseEntity();</span>
+        try {
+<span class="nc" id="L102">            int result = userService.modifyUserInfo(userEntity);</span>
+<span class="nc bnc" id="L103" title="All 2 branches missed.">            if (result != 0){</span>
+<span class="nc" id="L104">                httpResponseEntity.setCode(&quot;666&quot;);</span>
+<span class="nc" id="L105">                httpResponseEntity.setData(result);</span>
+<span class="nc" id="L106">                httpResponseEntity.setMessage(&quot;修改成功&quot;);</span>
+            }else {
+<span class="nc" id="L108">                httpResponseEntity.setCode(&quot;0&quot;);</span>
+<span class="nc" id="L109">                httpResponseEntity.setData(0);</span>
+<span class="nc" id="L110">                httpResponseEntity.setMessage(&quot;修改失败&quot;);</span>
+            }
+<span class="nc" id="L112">        }catch (Exception e){</span>
+<span class="nc" id="L113">            System.out.println(e.getMessage());</span>
+<span class="nc" id="L114">            e.printStackTrace();</span>
+<span class="nc" id="L115">        }</span>
+<span class="nc" id="L116">        return httpResponseEntity;</span>
+    }
+
+    /**
+     * 删除用户信息
+     */
+    @RequestMapping(value = &quot;/deleteUserInfo&quot;, method = RequestMethod.POST,headers = &quot;Accept=application/json&quot;)
+    public HttpResponseEntity deleteUser(@RequestBody UserEntity userEntity){
+<span class="nc" id="L124">        HttpResponseEntity httpResponseEntity = new HttpResponseEntity();</span>
+        try {
+<span class="nc" id="L126">            int result = userService.deleteUserById(userEntity);</span>
+<span class="nc bnc" id="L127" title="All 2 branches missed.">            if (result != 0){</span>
+<span class="nc" id="L128">                httpResponseEntity.setCode(&quot;666&quot;);</span>
+<span class="nc" id="L129">                httpResponseEntity.setData(result);</span>
+<span class="nc" id="L130">                httpResponseEntity.setMessage(&quot;删除成功&quot;);</span>
+            }else {
+<span class="nc" id="L132">                httpResponseEntity.setCode(&quot;0&quot;);</span>
+<span class="nc" id="L133">                httpResponseEntity.setData(0);</span>
+<span class="nc" id="L134">                httpResponseEntity.setMessage(&quot;删除失败&quot;);</span>
+            }
+<span class="nc" id="L136">        }catch (Exception e){</span>
+<span class="nc" id="L137">            System.out.println(e.getMessage());</span>
+<span class="nc" id="L138">            e.printStackTrace();</span>
+<span class="nc" id="L139">        }</span>
+<span class="nc" id="L140">        return httpResponseEntity;</span>
+    }
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.9.202303310957</span></div></body></html>

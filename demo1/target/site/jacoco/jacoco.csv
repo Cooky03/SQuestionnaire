@@ -1,0 +1,7 @@
+GROUP,PACKAGE,CLASS,INSTRUCTION_MISSED,INSTRUCTION_COVERED,BRANCH_MISSED,BRANCH_COVERED,LINE_MISSED,LINE_COVERED,COMPLEXITY_MISSED,COMPLEXITY_COVERED,METHOD_MISSED,METHOD_COVERED
+demo1,com.demo1.dao.entity,UserEntity,16,126,0,0,8,24,4,18,4,18
+demo1,com.demo1.controller,UserController,215,0,10,0,71,0,11,0,6,0
+demo1,com.demo1.service,UserService,48,0,2,0,15,0,7,0,6,0
+demo1,com.demo1,Demo1Application,8,0,0,0,3,0,2,0,2,0
+demo1,com.demo1.common.utils,UUIDUtil,24,32,4,0,7,2,4,1,2,1
+demo1,com.demo1.beans,HttpResponseEntity,24,0,0,0,10,0,7,0,7,0

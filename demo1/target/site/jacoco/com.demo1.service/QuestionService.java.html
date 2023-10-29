@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="zh"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>QuestionService.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">demo1</a> &gt; <a href="index.source.html" class="el_package">com.demo1.service</a> &gt; <span class="el_source">QuestionService.java</span></div><h1>QuestionService.java</h1><pre class="source lang-java linenums">package com.demo1.service;
+
+import com.demo1.common.utils.UUIDUtil;
+import com.demo1.dao.QuestionEntityMapper;
+import com.demo1.dao.entity.QuestionEntity;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import java.util.List;
+
+@Service
+<span class="fc" id="L12">public class QuestionService {</span>
+    @Autowired
+    private QuestionEntityMapper questionEntityMapper;
+
+    /**
+     * 查询问题
+     * @param questionEntity
+     * @return
+     */
+    public List&lt;QuestionEntity&gt; queryQuestionList(QuestionEntity questionEntity){
+<span class="fc" id="L22">        List&lt;QuestionEntity&gt; result = questionEntityMapper.queryQuestionList(questionEntity);</span>
+<span class="fc" id="L23">        return result;</span>
+    }
+
+    /**
+     * 创建问题
+     * @param questionEntity
+     * @return
+     */
+    public int insert(QuestionEntity questionEntity){
+<span class="fc" id="L32">        questionEntity.setId(UUIDUtil.getOneUUID());</span>
+<span class="fc" id="L33">        int result = questionEntityMapper.insert(questionEntity);</span>
+<span class="pc bpc" id="L34" title="1 of 2 branches missed.">        if (result != 0)</span>
+<span class="fc" id="L35">            return 3;</span>
+        else
+<span class="nc" id="L37">            return result;</span>
+    }
+
+    /**
+     * 修改问题
+     * @param questionEntity
+     * @return
+     */
+    public int updateByPrimaryKeySelective(QuestionEntity questionEntity){
+<span class="fc" id="L46">        int result = questionEntityMapper.updateByPrimaryKeySelective(questionEntity);</span>
+<span class="fc" id="L47">        return result;</span>
+    }
+
+    /**
+     * 删除问题
+     * @param questionEntity
+     * @return
+     */
+    public int deleteQuestionById(QuestionEntity questionEntity){
+<span class="fc" id="L56">        int result = questionEntityMapper.deleteQuestionById(questionEntity);</span>
+<span class="fc" id="L57">        return result;</span>
+    }
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.9.202303310957</span></div></body></html>

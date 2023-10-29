@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="zh"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>OptionService.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">demo1</a> &gt; <a href="index.source.html" class="el_package">com.demo1.service</a> &gt; <span class="el_source">OptionService.java</span></div><h1>OptionService.java</h1><pre class="source lang-java linenums">package com.demo1.service;
+
+import com.demo1.common.utils.UUIDUtil;
+import com.demo1.dao.OptionEntityMapper;
+import com.demo1.dao.entity.OptionEntity;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import java.util.List;
+
+@Service
+<span class="fc" id="L12">public class OptionService {</span>
+    @Autowired
+    private OptionEntityMapper optionEntityMapper;
+
+    /**
+     * 查询选项
+     * @param optionEntity
+     * @return
+     */
+    public List&lt;OptionEntity&gt; queryOptionList(OptionEntity optionEntity){
+<span class="fc" id="L22">        List&lt;OptionEntity&gt; result = optionEntityMapper.queryOptionList(optionEntity);</span>
+<span class="fc" id="L23">        return result;</span>
+    }
+
+    /**
+     * 创建选项
+     * @param optionEntity
+     * @return
+     */
+    public int insert(OptionEntity optionEntity){
+<span class="fc" id="L32">        optionEntity.setId(UUIDUtil.getOneUUID());</span>
+<span class="fc" id="L33">        int result = optionEntityMapper.insert(optionEntity);</span>
+<span class="pc bpc" id="L34" title="1 of 2 branches missed.">        if (result != 0)</span>
+<span class="fc" id="L35">            return 3;</span>
+        else
+<span class="nc" id="L37">            return result;</span>
+    }
+
+    /**
+     * 修改选项
+     * @param optionEntity
+     * @return
+     */
+    public int updateByPrimaryKeySelective(OptionEntity optionEntity){
+<span class="fc" id="L46">        int result = optionEntityMapper.updateByPrimaryKeySelective(optionEntity);</span>
+<span class="fc" id="L47">        return result;</span>
+    }
+
+    /**
+     * 删除选项
+     * @param optionEntity
+     * @return
+     */
+    public int deleteOptionById(OptionEntity optionEntity){
+<span class="fc" id="L56">        int result = optionEntityMapper.deleteOptionById(optionEntity);</span>
+<span class="fc" id="L57">        return result;</span>
+    }
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.9.202303310957</span></div></body></html>

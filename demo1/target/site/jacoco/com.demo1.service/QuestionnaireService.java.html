@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="zh"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>QuestionnaireService.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">demo1</a> &gt; <a href="index.source.html" class="el_package">com.demo1.service</a> &gt; <span class="el_source">QuestionnaireService.java</span></div><h1>QuestionnaireService.java</h1><pre class="source lang-java linenums">package com.demo1.service;
+
+import com.demo1.common.utils.UUIDUtil;
+import com.demo1.dao.QuestionnaireEntityMapper;
+import com.demo1.dao.entity.ProjectEntity;
+import com.demo1.dao.entity.QuestionnaireEntity;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import java.util.List;
+import java.util.Map;
+
+@Service
+<span class="fc" id="L14">public class QuestionnaireService {</span>
+
+    @Autowired
+    private QuestionnaireEntityMapper questionnaireEntityMapper;
+
+    /**
+     * 查询问卷
+     * @param projectEntity
+     * @return
+     */
+    public List&lt;QuestionnaireEntity&gt; queryQuestionnaireList(ProjectEntity projectEntity){
+<span class="fc" id="L25">        List&lt;QuestionnaireEntity&gt; result = questionnaireEntityMapper.queryQuestionnaireList(projectEntity);</span>
+<span class="fc" id="L26">        return result;</span>
+    }
+
+    /**
+     * 根据ID查询问卷
+     * @param questionnaireEntity
+     * @return
+     */
+    public List&lt;QuestionnaireEntity&gt; findQuestionnaireById(QuestionnaireEntity questionnaireEntity){
+<span class="fc" id="L35">        List&lt;QuestionnaireEntity&gt; result = questionnaireEntityMapper.findQuestionnaireById(questionnaireEntity);</span>
+<span class="fc" id="L36">        return result;</span>
+    }
+
+    /**
+     * 新增问卷
+     * @param questionnaireEntity
+     * @return
+     */
+    public int insert(QuestionnaireEntity questionnaireEntity){
+<span class="fc" id="L45">        questionnaireEntity.setId(UUIDUtil.getOneUUID());</span>
+<span class="fc" id="L46">        int questionnaireResult = questionnaireEntityMapper.insert(questionnaireEntity);</span>
+<span class="pc bpc" id="L47" title="1 of 2 branches missed.">        if (questionnaireResult!=0){</span>
+<span class="fc" id="L48">            return 3;</span>
+<span class="nc" id="L49">        }else return questionnaireResult;</span>
+    }
+
+    /**
+     * 修改问卷
+     * @param questionnaireEntity
+     * @return
+     */
+    public int updateByPrimaryKeySelective(QuestionnaireEntity questionnaireEntity){
+<span class="nc" id="L58">        int questionnaireResult = questionnaireEntityMapper.updateByPrimaryKeSelective(questionnaireEntity);</span>
+<span class="nc" id="L59">        return questionnaireResult;</span>
+    }
+
+    /**
+     * 删除问卷
+     * @param questionnaireEntity
+     * @return
+     */
+    public int deleteQuestionnaireById(QuestionnaireEntity questionnaireEntity){
+<span class="fc" id="L68">        int questionnaireResult = questionnaireEntityMapper.deleteQuestionnaireById(questionnaireEntity);</span>
+<span class="fc" id="L69">        return questionnaireResult;</span>
+    }
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.9.202303310957</span></div></body></html>

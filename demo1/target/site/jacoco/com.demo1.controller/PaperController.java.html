@@ -1,0 +1,131 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="zh"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>PaperController.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">demo1</a> &gt; <a href="index.source.html" class="el_package">com.demo1.controller</a> &gt; <span class="el_source">PaperController.java</span></div><h1>PaperController.java</h1><pre class="source lang-java linenums">package com.demo1.controller;
+
+import com.demo1.beans.HttpResponseEntity;
+import com.demo1.dao.entity.Paper;
+import com.demo1.dao.entity.QuestionnaireEntity;
+import com.demo1.service.PaperService;
+import com.demo1.service.QuestionnaireService;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
+import org.springframework.util.CollectionUtils;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
+
+@RestController
+<span class="fc" id="L16">public class PaperController {</span>
+
+    @Autowired
+    private PaperService paperService;
+    @Autowired
+    private QuestionnaireService questionnaireService;
+
+    /**
+     * 查询答卷
+     *
+     * @param paper
+     * @return
+     */
+    @RequestMapping(value = &quot;/admin/queryPaperList&quot;, method = RequestMethod.POST, headers = &quot;Accept=application/json&quot;)
+    public HttpResponseEntity queryPaperList(@RequestBody Paper paper) {
+<span class="fc" id="L31">        HttpResponseEntity httpResponseEntity = new HttpResponseEntity();</span>
+        try {
+<span class="fc" id="L33">            List&lt;Paper&gt; hasPaper = paperService.findByQuestionnaireId(paper);</span>
+<span class="fc bfc" id="L34" title="All 2 branches covered.">            if (CollectionUtils.isEmpty(hasPaper)) {</span>
+<span class="fc" id="L35">                httpResponseEntity.setCode(&quot;0&quot;);</span>
+<span class="fc" id="L36">                httpResponseEntity.setData(0);</span>
+<span class="fc" id="L37">                httpResponseEntity.setMessage(&quot;无答卷信息&quot;);</span>
+            } else {
+<span class="fc" id="L39">                httpResponseEntity.setCode(&quot;666&quot;);</span>
+<span class="fc" id="L40">                httpResponseEntity.setData(hasPaper);</span>
+<span class="fc" id="L41">                httpResponseEntity.setMessage(&quot;查询成功&quot;);</span>
+            }
+<span class="nc" id="L43">        } catch (Exception e) {</span>
+<span class="nc" id="L44">            System.out.println(e.getMessage());</span>
+<span class="nc" id="L45">            e.printStackTrace();</span>
+<span class="fc" id="L46">        }</span>
+<span class="fc" id="L47">        return httpResponseEntity;</span>
+    }
+
+    /**
+     * 增加答卷
+     *
+     * @param paper
+     * @return
+     */
+    @RequestMapping(value = &quot;/admin/addPaperInfo&quot;, method = RequestMethod.POST, headers = &quot;Accept=application/json&quot;)
+    public HttpResponseEntity addPaperInfo(@RequestBody Paper paper) {
+<span class="fc" id="L58">        HttpResponseEntity httpResponseEntity = new HttpResponseEntity();</span>
+        try {
+<span class="fc" id="L60">            String result = paperService.insert(paper);</span>
+<span class="pc bpc" id="L61" title="1 of 2 branches missed.">            if (result != &quot;false&quot;) {</span>
+<span class="fc" id="L62">                httpResponseEntity.setCode(&quot;666&quot;);</span>
+<span class="fc" id="L63">                httpResponseEntity.setData(result);</span>
+<span class="fc" id="L64">                httpResponseEntity.setMessage(&quot;新增答卷成功&quot;);</span>
+            } else {
+<span class="nc" id="L66">                httpResponseEntity.setCode(&quot;0&quot;);</span>
+<span class="nc" id="L67">                httpResponseEntity.setData(0);</span>
+<span class="nc" id="L68">                httpResponseEntity.setMessage(&quot;新增答卷失败&quot;);</span>
+            }
+<span class="nc" id="L70">        } catch (Exception e) {</span>
+<span class="nc" id="L71">            System.out.println(e.getMessage());</span>
+<span class="nc" id="L72">            e.printStackTrace();</span>
+<span class="fc" id="L73">        }</span>
+<span class="fc" id="L74">        return httpResponseEntity;</span>
+    }
+
+    /**
+     * 修改答卷
+     *
+     * @param paper
+     * @return
+     */
+    @RequestMapping(value = &quot;/admin/modifyPaperInfo&quot;, method = RequestMethod.POST, headers = &quot;Accept=application/json&quot;)
+    public HttpResponseEntity modifyPaperInfo(@RequestBody Paper paper) {
+<span class="fc" id="L85">        HttpResponseEntity httpResponseEntity = new HttpResponseEntity();</span>
+        try {
+<span class="fc" id="L87">            int result = paperService.updateByPrimaryKeySelective(paper);</span>
+<span class="fc bfc" id="L88" title="All 2 branches covered.">            if (result != 0) {</span>
+<span class="fc" id="L89">                httpResponseEntity.setCode(&quot;666&quot;);</span>
+<span class="fc" id="L90">                httpResponseEntity.setData(result);</span>
+<span class="fc" id="L91">                httpResponseEntity.setMessage(&quot;修改成功&quot;);</span>
+            } else {
+<span class="fc" id="L93">                httpResponseEntity.setCode(&quot;0&quot;);</span>
+<span class="fc" id="L94">                httpResponseEntity.setData(0);</span>
+<span class="fc" id="L95">                httpResponseEntity.setMessage(&quot;修改失败&quot;);</span>
+            }
+<span class="nc" id="L97">        } catch (Exception e) {</span>
+<span class="nc" id="L98">            System.out.println(e.getMessage());</span>
+<span class="nc" id="L99">            e.printStackTrace();</span>
+<span class="fc" id="L100">        }</span>
+<span class="fc" id="L101">        return httpResponseEntity;</span>
+    }
+
+    /**
+     * 删除答卷
+     *
+     * @param paper
+     * @return
+     */
+    @RequestMapping(value = &quot;/admin/deletePaperById&quot;, method = RequestMethod.POST, headers = &quot;Accept=application/json&quot;)
+    public HttpResponseEntity deletePaperById(@RequestBody Paper paper) {
+<span class="fc" id="L112">        HttpResponseEntity httpResponseEntity = new HttpResponseEntity();</span>
+        try {
+<span class="fc" id="L114">            int result = paperService.deletePaperById(paper);</span>
+<span class="fc bfc" id="L115" title="All 2 branches covered.">            if (result != 0) {</span>
+<span class="fc" id="L116">                httpResponseEntity.setCode(&quot;666&quot;);</span>
+<span class="fc" id="L117">                httpResponseEntity.setData(result);</span>
+<span class="fc" id="L118">                httpResponseEntity.setMessage(&quot;删除成功&quot;);</span>
+            } else {
+<span class="fc" id="L120">                httpResponseEntity.setCode(&quot;0&quot;);</span>
+<span class="fc" id="L121">                httpResponseEntity.setData(0);</span>
+<span class="fc" id="L122">                httpResponseEntity.setMessage(&quot;删除失败&quot;);</span>
+            }
+<span class="nc" id="L124">        } catch (Exception e) {</span>
+<span class="nc" id="L125">            System.out.println(e.getMessage());</span>
+<span class="nc" id="L126">            e.printStackTrace();</span>
+<span class="fc" id="L127">        }</span>
+<span class="fc" id="L128">        return httpResponseEntity;</span>
+    }
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.9.202303310957</span></div></body></html>

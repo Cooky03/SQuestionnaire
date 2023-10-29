@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="zh"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>PaperAnswerService.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">demo1</a> &gt; <a href="index.source.html" class="el_package">com.demo1.service</a> &gt; <span class="el_source">PaperAnswerService.java</span></div><h1>PaperAnswerService.java</h1><pre class="source lang-java linenums">package com.demo1.service;
+
+import com.demo1.common.utils.UUIDUtil;
+import com.demo1.dao.PaperAnswerEntityMapper;
+import com.demo1.dao.entity.PaperAnswer;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import java.util.List;
+
+@Service
+<span class="fc" id="L12">public class PaperAnswerService {</span>
+
+    @Autowired
+    private PaperAnswerEntityMapper paperAnswerEntityMapper;
+
+    /**
+     * 查询答卷选项
+     * @param paperAnswer
+     * @return
+     */
+    public List&lt;PaperAnswer&gt; queryPaperAnswerList(PaperAnswer paperAnswer){
+<span class="fc" id="L23">        List&lt;PaperAnswer&gt; result = paperAnswerEntityMapper.queryPaperAnswerList(paperAnswer);</span>
+<span class="fc" id="L24">        return result;</span>
+    }
+
+    /**
+     * 创建答卷选项
+     * @param paperAnswer
+     * @return
+     */
+    public int insert(PaperAnswer paperAnswer){
+<span class="fc" id="L33">        paperAnswer.setId(UUIDUtil.getOneUUID());</span>
+<span class="fc" id="L34">        int result = paperAnswerEntityMapper.insert(paperAnswer);</span>
+<span class="pc bpc" id="L35" title="1 of 2 branches missed.">        if (result != 0)</span>
+<span class="fc" id="L36">            return 3;</span>
+        else
+<span class="nc" id="L38">            return result;</span>
+    }
+
+    /**
+     * 修改答卷选项
+     * @param paperAnswer
+     * @return
+     */
+    public int updateByPrimaryKeySelective(PaperAnswer paperAnswer){
+<span class="fc" id="L47">        int result = paperAnswerEntityMapper.updateByPrimaryKeySelective(paperAnswer);</span>
+<span class="fc" id="L48">        return result;</span>
+    }
+
+    /**
+     * 删除答卷选项
+     * @param paperAnswer
+     * @return
+     */
+    public int deletePaperAnswerById(PaperAnswer paperAnswer){
+<span class="fc" id="L57">        int result = paperAnswerEntityMapper.deletePaperAnswerById(paperAnswer);</span>
+<span class="fc" id="L58">        return result;</span>
+    }
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.9.202303310957</span></div></body></html>

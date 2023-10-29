@@ -1,0 +1,116 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="zh"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>UserEntity.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">demo1</a> &gt; <a href="index.source.html" class="el_package">com.demo1.dao.entity</a> &gt; <span class="el_source">UserEntity.java</span></div><h1>UserEntity.java</h1><pre class="source lang-java linenums">package com.demo1.dao.entity;
+
+import java.io.Serializable;
+import java.util.Date;
+
+<span class="fc" id="L6">public class UserEntity implements Serializable {</span>
+    private String id;
+    private String username;
+    private String password;
+    private Date startTime;
+    private Date stopTime;
+    private String status;
+    private String createdBy;
+    private Date creationDate;
+
+    @Override
+    public String toString() {
+<span class="fc" id="L18">        return &quot;UserEntity{&quot; +</span>
+                &quot;id='&quot; + id + '\'' +
+                &quot;, username='&quot; + username + '\'' +
+                &quot;, password='&quot; + password + '\'' +
+                &quot;, startTime=&quot; + startTime +
+                &quot;, stopTime=&quot; + stopTime +
+                &quot;, status='&quot; + status + '\'' +
+                &quot;, createdBy='&quot; + createdBy + '\'' +
+                &quot;, creationDate=&quot; + creationDate +
+                &quot;, lastUpdatedBy='&quot; + lastUpdatedBy + '\'' +
+                &quot;, lastUpdateDate=&quot; + lastUpdateDate +
+                '}';
+    }
+
+    private String lastUpdatedBy;
+
+    public String getId() {
+<span class="fc" id="L35">        return id;</span>
+    }
+
+    public void setId(String id) {
+<span class="fc" id="L39">        this.id = id;</span>
+<span class="fc" id="L40">    }</span>
+
+    public String getUsername() {
+<span class="fc" id="L43">        return username;</span>
+    }
+
+    public void setUsername(String username) {
+<span class="fc" id="L47">        this.username = username;</span>
+<span class="fc" id="L48">    }</span>
+
+    public String getPassword() {
+<span class="fc" id="L51">        return password;</span>
+    }
+
+    public void setPassword(String password) {
+<span class="fc" id="L55">        this.password = password;</span>
+<span class="fc" id="L56">    }</span>
+
+    public Date getStartTime() {
+<span class="fc" id="L59">        return startTime;</span>
+    }
+
+    public void setStartTime(Date startTime) {
+<span class="fc" id="L63">        this.startTime = startTime;</span>
+<span class="fc" id="L64">    }</span>
+
+    public Date getStopTime() {
+<span class="fc" id="L67">        return stopTime;</span>
+    }
+
+    public void setStopTime(Date stopTime) {
+<span class="fc" id="L71">        this.stopTime = stopTime;</span>
+<span class="fc" id="L72">    }</span>
+
+    public String getStatus() {
+<span class="fc" id="L75">        return status;</span>
+    }
+
+    public void setStatus(String status) {
+<span class="fc" id="L79">        this.status = status;</span>
+<span class="fc" id="L80">    }</span>
+
+    public String getCreatedBy() {
+<span class="fc" id="L83">        return createdBy;</span>
+    }
+
+    public void setCreatedBy(String createdBy) {
+<span class="nc" id="L87">        this.createdBy = createdBy;</span>
+<span class="nc" id="L88">    }</span>
+
+    public Date getCreationDate() {
+<span class="fc" id="L91">        return creationDate;</span>
+    }
+
+    public void setCreationDate(Date creationDate) {
+<span class="nc" id="L95">        this.creationDate = creationDate;</span>
+<span class="nc" id="L96">    }</span>
+
+    public String getLastUpdatedBy() {
+<span class="fc" id="L99">        return lastUpdatedBy;</span>
+    }
+
+    public void setLastUpdatedBy(String lastUpdatedBy) {
+<span class="nc" id="L103">        this.lastUpdatedBy = lastUpdatedBy;</span>
+<span class="nc" id="L104">    }</span>
+
+    public Date getLastUpdateDate() {
+<span class="fc" id="L107">        return lastUpdateDate;</span>
+    }
+
+    public void setLastUpdateDate(Date lastUpdateDate) {
+<span class="nc" id="L111">        this.lastUpdateDate = lastUpdateDate;</span>
+<span class="nc" id="L112">    }</span>
+
+    private Date lastUpdateDate;
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.9.202303310957</span></div></body></html>
